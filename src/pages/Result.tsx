@@ -1,66 +1,59 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import * as dayjs from 'dayjs';
+import { Box, Container, Flex, Text } from '@chakra-ui/react';
 import { useAppDispatch, useAppSelector } from '../store';
 import { fetchTests } from '../store/Slices/testSlice';
-// import {
-//   Chart as Chartjs,
-//   CategoryScale,
-//   LinearScale,
-//   BarElement,
-//   Title,
-//   Tooltip,
-//   Legend,
-//   registerables,
-// } from 'chart.js';
-// import { Bar } from 'react-chartjs-2';
-
-// Chartjs.register(
-//   CategoryScale,
-//   LinearScale,
-//   BarElement,
-//   Title,
-//   Tooltip,
-//   Legend
-// );
+import ChartBar from '../components/ChartBar';
 
 function Result() {
-  // const [chartData, setChartData] = useState({
-  //   datasets: [],
-  // });
-  // const [chartOptions, setChartOptions] = useState({});
   const { tests, newTest } = useAppSelector((state) => state.tests);
   const dispatch = useAppDispatch();
-  console.log(tests);
+
   useEffect(() => {
     dispatch(fetchTests());
   }, [dispatch]);
 
-  // useEffect(() => {
-  //   setChartData({
-  //     labels: tests.map((el) => dayjs(el.time).format('YY MM DD')),
-  //     datasets: [{ label: 'results', data: tests.map((el) => el.result) }],
-  //     backgroundColor: 'rgb(0, 255, 0)',
-  //   });
-  //   setChartOptions({
-  //     responsive: true,
-  //     plugins: {
-  //       legend: {
-  //         position: 'bottom',
-  //       },
-  //     },
-  //   });
-  // }, [tests]);
   return (
-    <div>
-      {newTest && <h1>result: {newTest?.result} %</h1>}
-      {/* <Bar options={chartOptions} data={chartData} /> */}
-      {/* {tests.map((el, i) => (
-        <div key={i}>
-          <p>{el.result}</p>
-          <p>{dayjs(el.time).format("YY MM DD")}</p>
-        </div>
-      ))} */}
-    </div>
+    <Box as="section" w="full">
+      <Container maxW="6xl">
+        <Box pt="50px" pb="20px">
+          {newTest && (
+            <Flex
+              w="full"
+              h="100px"
+              direction="column"
+              align="center"
+              justify="center"
+              bg="white"
+              borderRadius="8px"
+              boxShadow="3px 3px 6px gray"
+              mb="30px"
+            >
+              <Text>
+                {newTest.result < 40 &&
+                  newTest.result >= 0 &&
+                  'You can do much better'}
+                {newTest.result < 80 &&
+                  newTest.result >= 40 &&
+                  'Very good job!'}
+                {newTest.result >= 80 && 'Excellent!!!'}
+              </Text>
+              <Text>Result: {newTest.result}%</Text>
+              <Text>{dayjs(newTest.time).format('YYYY/MM/DD HH:MM:ss')}</Text>
+            </Flex>
+          )}
+          <Box
+            p="15px"
+            bg="white"
+            borderRadius="8px"
+            boxShadow="3px 3px 6px gray"
+            mb="20px"
+          >
+            <ChartBar tests={tests} />
+          </Box>
+        </Box>
+      </Container>
+    </Box>
   );
 }
 

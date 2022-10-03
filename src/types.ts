@@ -1,6 +1,7 @@
 export type Word = {
   word: string;
   translation: string;
+  id?: string;
 };
 
 export type Test = {

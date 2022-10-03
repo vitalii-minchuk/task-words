@@ -1,3 +1,4 @@
+import { Box, Text } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { goToNextQuestion, selectAnswer } from '../../store/Slices/wordsSlice';
@@ -25,24 +26,28 @@ function Question() {
     return () => clearTimeout(timer);
   }, [dispatch, touched]);
   return (
-    <>
-      <div>{question}</div>
-      {answers?.map((el) => {
-        // const correct =
-        //   touched &&
-        //   currentAnswer === wordsForQuiz[currentQuestionIndex]?.correct;
-        // const incorrect = touched && currentAnswer === el;
-        return (
-          <Answer
-            onClick={handleClick}
-            currentAnswer={currentAnswer}
-            key={el}
-            correct={wordsForQuiz[currentQuestionIndex]?.correct}
-            answer={el}
-          />
-        );
-      })}
-    </>
+    <Box h="250px" w="full" mb="30px">
+      <Text mb="20px" textAlign="center" fontSize="18px">
+        How do you translate
+        <span style={{ color: 'green', fontSize: '24px', fontWeight: 'bold' }}>
+          {`  ${question}  `}
+        </span>
+        ?
+      </Text>
+      <Box>
+        {answers?.map((el) => {
+          return (
+            <Answer
+              onClick={handleClick}
+              currentAnswer={currentAnswer}
+              key={el}
+              correct={wordsForQuiz[currentQuestionIndex]?.correct}
+              answer={el}
+            />
+          );
+        })}
+      </Box>
+    </Box>
   );
 }
 

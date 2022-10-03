@@ -28,11 +28,7 @@ function WordForm({
 
   return (
     <Flex as="form" direction="column" gap="30px" mt="30px">
-      <FormControl
-        sx={{ position: 'relative' }}
-        variant="floating"
-        isInvalid={touched.word && !!errors.word}
-      >
+      <FormControl isInvalid={touched.word && !!errors.word}>
         <FormLabel>Word:</FormLabel>
         <Input
           height="54px"
@@ -44,11 +40,7 @@ function WordForm({
         />
         <FormErrorMessage>{errors.word}</FormErrorMessage>
       </FormControl>
-      <FormControl
-        sx={{ position: 'relative' }}
-        variant="floating"
-        isInvalid={touched.translation && !!errors.translation}
-      >
+      <FormControl isInvalid={touched.translation && !!errors.translation}>
         <FormLabel>Translation:</FormLabel>
         <Input
           height="54px"

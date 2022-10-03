@@ -1,12 +1,12 @@
-import { Flex, Text } from '@chakra-ui/react';
+import { Button, Flex, Text } from '@chakra-ui/react';
 import { Word } from '../../types';
 
 type IWordCardProps = {
   word: Word;
-  index: number;
+  handleDeleteWord: (obj: Word) => void;
 };
 
-function WordCard({ word, index }: IWordCardProps) {
+function WordCard({ word, handleDeleteWord }: IWordCardProps) {
   return (
     <Flex
       bg="white"
@@ -16,16 +16,20 @@ function WordCard({ word, index }: IWordCardProps) {
       boxShadow="3px 3px 6px gray"
       align="center"
       justify="space-between"
-      _hover={{}}
     >
       <Flex>
-        <Text fontWeight="bold">
-          {index}. {word.word} -
-        </Text>
+        <Text fontWeight="bold">{word.word} -</Text>
         <Text>{word.translation}</Text>
       </Flex>
       <Flex>
-        <button type="button">ok</button>
+        <Button
+          onClick={() => handleDeleteWord(word)}
+          color="red.500"
+          variant="text"
+          type="button"
+        >
+          delete
+        </Button>
       </Flex>
     </Flex>
   );

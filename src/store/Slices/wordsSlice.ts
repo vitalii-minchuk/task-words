@@ -31,9 +31,15 @@ const wordsSlice = createSlice({
       state.fetchError = action.payload;
       state.isLoading = false;
     },
+    setNewWord(state, action: PayloadAction<Word>) {
+      state.newWord = action.payload;
+    },
     createNewWord(state, action: PayloadAction<Word>) {
       state.words.push(action.payload);
       state.newWord = action.payload;
+    },
+    deleteWord(state) {
+      state.words = state.words.filter((el) => el.id !== state.newWord?.id);
     },
     createWordsGroupForQuiz(state) {
       state.wordsForQuiz = getWordsForQuiz(state.words);
@@ -71,6 +77,8 @@ const wordsSlice = createSlice({
 });
 
 export const {
+  setNewWord,
+  deleteWord,
   selectAnswer,
   resetQuiz,
   goToNextQuestion,

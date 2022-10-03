@@ -14,6 +14,10 @@ const API = {
     const { data } = await client.post<Word>('/words', obj);
     return data;
   },
+  deleteWord: async (id: string) => {
+    const { data } = await client.delete(`/words/${id}`);
+    return data;
+  },
   fetchTestsData: async () => {
     const { data } = await client.get<Test[]>('/tests');
     return data;

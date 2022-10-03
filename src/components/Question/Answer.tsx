@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/react';
+import { Center } from '@chakra-ui/react';
 
 interface IAnswerProps {
   answer: string;
@@ -10,12 +10,18 @@ function Answer({ onClick, answer, correct, currentAnswer }: IAnswerProps) {
   const isCorrect = currentAnswer && answer === correct;
   const isIncorrect = currentAnswer === answer && currentAnswer !== correct;
   return (
-    <Box
+    <Center
+      width="260px"
+      mx="auto"
+      height="40px"
+      mb="5px"
+      borderRadius="8px"
+      cursor="pointer"
       onClick={() => onClick(answer)}
       bg={`${isCorrect ? 'green' : ''} ${isIncorrect ? 'red' : ''}`}
     >
       {answer}
-    </Box>
+    </Center>
   );
 }
 
