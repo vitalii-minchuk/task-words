@@ -50,7 +50,7 @@ function Home() {
 
   return (
     <Box as="section" w="full">
-      <Container maxW="6xl">
+      <Container maxW="6xl" pb="30px">
         <Box pt="50px" pb="20px">
           <FormControl
             maxW="450px"

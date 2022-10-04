@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import * as dayjs from 'dayjs';
 import { Box, Container, Flex, Text } from '@chakra-ui/react';
 import { useAppDispatch, useAppSelector } from '../store';
 import { fetchTests } from '../store/Slices/testSlice';
@@ -16,7 +15,7 @@ function Result() {
   return (
     <Box as="section" w="full">
       <Container maxW="6xl">
-        <Box pt="50px" pb="20px">
+        <Box pt="50px" pb="50px">
           {newTest && (
             <Flex
               w="full"
@@ -39,7 +38,7 @@ function Result() {
                 {newTest.result >= 80 && 'Excellent!!!'}
               </Text>
               <Text>Result: {newTest.result}%</Text>
-              <Text>{dayjs(newTest.time).format('YYYY/MM/DD HH:MM:ss')}</Text>
+              <Text>{newTest.time}</Text>
             </Flex>
           )}
           <Box
